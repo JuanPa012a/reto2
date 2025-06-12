@@ -1,7 +1,11 @@
 package com.devsenior.pablo;
 
+import com.devsenior.pablo.view.EmergenciasView;
+
+
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new EmergenciasView().menuprincipal();
     }
 }

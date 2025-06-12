@@ -1,14 +1,14 @@
 package com.devsenior.pablo.model;
 
 public class Vehiculo {
-    private final Long id;
+    private final String id;
     private final String nombre;
     private final String placa;
     private Long combustible;
     
     
     
-    public Vehiculo(Long id, String nombre, String placa, Long combustible) {
+    public Vehiculo(String id, String nombre, String placa, Long combustible) {
         this.id = id;
         this.nombre = nombre;
         this.combustible = combustible;
@@ -36,9 +36,17 @@ public class Vehiculo {
 
 
 
-    public Long getId() {
+    public String getId() {
         return id;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Vehiculo [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", combustible=" + combustible + "]";
     }
     
     
+
 }

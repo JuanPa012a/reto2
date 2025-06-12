@@ -5,28 +5,19 @@
 
 package com.devsenior.pablo.model.Emergencias;
 
+import com.devsenior.pablo.Util.NivelGravedad;
+import com.devsenior.pablo.Util.Tipo;
 import com.devsenior.pablo.model.Emergencia;
-import com.devsenior.pablo.model.Tipo;
-import com.devsenior.pablo.service.Responder;
 
 /**
  *
  * @author Juanpa
  */
-public class Incendio extends Emergencia implements Responder{
+public class Incendio extends Emergencia {
 
-    public Incendio(Tipo tipo, String ubicacion, Integer nivelGravedad, Integer tiempoRespuesta) {
+    public Incendio(Tipo tipo, String ubicacion, NivelGravedad nivelGravedad, Long tiempoRespuesta) {
         super(tipo, ubicacion, nivelGravedad, tiempoRespuesta);
     }
 
-    @Override
-    public void atenderEmergencia() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void evaluarEstado(String estado) {
-        System.out.println(estado);
-    }
 
 }

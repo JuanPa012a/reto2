@@ -9,7 +9,7 @@ public interface EmergenciaService {
     
     Integer getPersonal();
 
-    Long getCombustible(Long idVehiculo);
+    Long getCombustible(String idVehiculo);
 
     LinkedList<Vehiculo> getAllVehiculos();
 
@@ -23,9 +23,17 @@ public interface EmergenciaService {
 
     void agergarVehiculo(Vehiculo vehiculo);
 
-    void enviarPersonal(Integer cantidad);
+    void tanquearVehiculo(Vehiculo vehiculo, Long cantidad);
 
-    void enviarVehiculo();
+    Boolean combustibleConsumido(Vehiculo vehiculo, Long cantidad);
+
+    Boolean enviarPersonal(Integer cantidad);
+
+    Boolean enviarVehiculo();
+
+    void devolverVehiculo();
+
+    void devolverPersonal();
 
 
 }

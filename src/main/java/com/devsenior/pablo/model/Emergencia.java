@@ -1,5 +1,8 @@
 package com.devsenior.pablo.model;
 
+import com.devsenior.pablo.Util.NivelGravedad;
+import com.devsenior.pablo.Util.Tipo;
+
 /**
  *
  * @author Juanpa
@@ -7,17 +10,19 @@ package com.devsenior.pablo.model;
 public class Emergencia {
     private final Tipo tipo;
     private final String ubicacion;
-    private Integer nivelGravedad;
-    private Integer tiempoRespuesta;
+    private final NivelGravedad nivelGravedad;
+    private Long tiempoRespuesta;
     private Long tiempoInicial;
     private Long tiempoFinal;
+    private Boolean atendida;
 
     
-    public Emergencia(Tipo tipo, String ubicacion, Integer nivelGravedad, Integer tiempoRespuesta) {
+    public Emergencia(Tipo tipo, String ubicacion, NivelGravedad nivelGravedad, Long tiempoRespuesta) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.nivelGravedad = nivelGravedad;
         this.tiempoRespuesta = tiempoRespuesta;
+        atendida = false;
     }
 
     
@@ -29,22 +34,21 @@ public class Emergencia {
         return ubicacion;
     }
    
-    public Integer getNivelGravedad() {
+    public NivelGravedad getNivelGravedad() {
         return nivelGravedad;
     }
-    public void setNivelGravedad(Integer nivelGravedad) {
-        this.nivelGravedad = nivelGravedad;
+    
+    public String getTiempoRespuesta() {
+  
+        return  transformarTiempo(tiempoRespuesta);
     }
-    public Integer getTiempoRespuesta() {
-        return tiempoRespuesta;
-    }
-    public void setTiempoRespuesta(Integer tiempoRespuesta) {
+    public void setTiempoRespuesta(Long tiempoRespuesta) {
         this.tiempoRespuesta = tiempoRespuesta;
     }
 
 
-    public Long getTiempoInicial() {
-        return tiempoInicial;
+    public String getTiempoInicial() {
+        return transformarTiempo(tiempoInicial-tiempoRespuesta);
     }
 
 
@@ -58,10 +62,43 @@ public class Emergencia {
     }
 
 
-    public void setTiempoFinal(Long tiempoFinal) {
-        this.tiempoFinal = tiempoFinal;
+    
+    public void iniciarAtencion(){
+        tiempoInicial = System.currentTimeMillis();
+        atendida = true;
     }
 
+    public void finalizarAtencion(){
+        tiempoFinal = System.currentTimeMillis();
+        atendida = false;
+    }
+
+    public void calcularTiempoAtencion(){
+        tiempoRespuesta = tiempoFinal - tiempoInicial;
+        
+        
+    }
+
+
+    public Boolean getAtendida() {
+        return atendida;
+    }
+    
+    private String transformarTiempo(Long tiempo){
+        long tiempoTotal = tiempo;
+        long horas = tiempoTotal / 3600;
+        long minutos = (tiempoTotal % 3600) / 60;
+        long segundos = tiempoTotal % 60;
+
+        return  horas + ":"+minutos+":"+segundos;
+    }
     
     
+    @Override
+    public String toString() {
+        return "|Emergencia: " + this.getClass().getSimpleName()
+             + " | Tiempo estimado: "+ this.getTiempoInicial()+
+             " | Ubicacion: "+this.getUbicacion()+
+             " | Nivel de gravedad: "+this.getNivelGravedad();
+    }
 }
